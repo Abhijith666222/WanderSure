@@ -1,485 +1,179 @@
-# WanderSure
-MSIG Conversational Insurance Chatbot
+<div align="center">
+
+# ✈️ WanderSure
+
+### **Conversational travel insurance that actually gets you.**
+
+*No forms. No fine print hunting. Just talk.*
+
+[![MSIG](https://img.shields.io/badge/MSIG-Conversational%20Insurance-0066B3?style=flat-square)](https://github.com/Abhijith666222/WanderSure)
+[![Groq AI](https://img.shields.io/badge/Powered%20by-Groq%20AI-000?style=flat-square)](https://groq.com)
+[![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
+[![Next.js](https://img.shields.io/badge/Frontend-Next.js%2014-000?style=flat-square&logo=next.js)](https://nextjs.org)
+
+</div>
 
 ---
 
-# Ancileo × MSIG — Conversational Insurance Challenge
+## 🎯 What is WanderSure?
 
-## 🎯 Challenge Summary
-
-**Your Goal**: Create a breakthrough conversational AI that transforms insurance from a tedious form-filling process into an engaging, intelligent dialogue.
-
-**The Innovation Opportunity**: We've provided a foundation with 5 feature blocks, but **your creativity is unlimited**. Think beyond traditional insurance flows—imagine how AI can make insurance truly conversational, personalized, and delightful.
-
-> **💡 INNOVATION FIRST**: While we provide guidance through feature blocks, we encourage you to:
-> - **Rethink the entire user journey** — What if insurance was as engaging as chatting with a knowledgeable friend?
-> - **Experiment with novel approaches** — Surprise us with creative solutions we haven't considered
-> - **Focus on the B2C experience** — Make it so good that customers prefer your bot over human agents
-> - **Push the boundaries** — Use the provided data and tools as a springboard, not a constraint
-
-> **📖 CONTEXT**: Read the **Next-Generation Conversational Travel Insurance Distribution Hackathon.pdf** for background, but don't let it limit your imagination. The best solutions often come from questioning assumptions and exploring uncharted territory.
-
-> **API KEY**: To access the Ancileo × MSIG hackathon endpoints, use the event API key below.
-
- API KEY -> https://pwpush.com/p/y9hg-pkgeg-bzeik/r
+**WanderSure** turns travel insurance from a chore into a conversation. Upload a booking, ask in plain language, get answers with real policy citations, compare plans side by side, and buy without leaving the chat. We built all five innovation blocks from the Ancileo × MSIG challenge and then went further: sentiment-aware replies, multi-language support, document-based quoting, risk scoring from claims data, and Stripe payments wired into the flow.
 
 ---
 
-## 📋 The Problem We're Solving
+## 🚀 Why it's cool
 
-### Current State
-- Customers spend **10-30 minutes** filling forms and reading dense policy documents
-- No real-time Q&A with an expert
-- Manual comparison across products is confusing and error-prone
-- High abandonment rates (70%+) due to friction
+| Before | With WanderSure |
+|--------|------------------|
+| 10–30 min of forms | Chat and upload; quote in minutes |
+| Guessing which plan fits | Compare policies on any criteria with citations |
+| Dense PDFs and jargon | Plain-language answers + exact policy references |
+| Pay and hope | Risk assessment + coverage suggestions, then pay in-chat |
 
-### What You're Building
-- **Conversational Insurance** 
-- Upload your policies → get instant personalized quotes
-- Ask questions, get answers with exact policy citations
-- Complete purchase without leaving the chat
-
-### Who Benefits
-- **End users**: Travelers buying insurance through ChatGPT, Claude, or similar AI assistants
-- **AI developers**: Building insurance-aware conversational agents
-- **Insurance teams**: Transforming distribution channels with AI
+We deliver a **zero-form experience**: extract trip details from PDFs and images, validate and fill gaps with questions, recommend coverage using historical claims patterns, and complete purchase via Stripe with status updates in the same conversation.
 
 ---
 
-## 🎯 Innovation Framework — Your Creative Playground
+## 🧩 What we built (all 5 blocks)
 
-We've outlined **5 feature blocks** as inspiration, but remember: **these are starting points, not requirements**. The most innovative solutions often emerge when you:
+### 🧠 Block 1: Policy intelligence
 
-- **Add entirely new capabilities** we haven't imagined
-- **Rethink the conversation flow** from first principles
-- **Create delightful micro-interactions** that surprise and engage
+- **PDF extraction** from all policy PDFs (PyPDF2 + pdfplumber).
+- **Dynamic normalization** with Groq LLM into the taxonomy structure.
+- **Semantic handling** of terms like "medical expenses" vs "healthcare costs".
+- **Side-by-side comparison** of any policies on chosen criteria.
+- **Citations** so every explanation points to exact policy text.
 
-### The Foundation Blocks (Use as Inspiration)
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│  🧠 Block 1: Policy Intelligence                               │
-│  ↓ Your creative approach to understanding insurance documents │
-├─────────────────────────────────────────────────────────────────┤
-│  💬 Block 2: Conversational Magic                              │
-│  ↓ How will you make insurance chat feel natural and helpful? │
-├─────────────────────────────────────────────────────────────────┤
-│  📄 Block 3: Document Intelligence                             │
-│  ↓ What innovative ways can you extract and use trip data?    │
-├─────────────────────────────────────────────────────────────────┤
-│  💳 Block 4: Seamless Commerce                                 │
-│  ↓ How do you make purchasing feel effortless and secure?     │
-├─────────────────────────────────────────────────────────────────┤
-│  🎯 Block 5: Predictive Intelligence                           │
-│  ↓ How can you use claims data to create breakthrough insights?│
-└─────────────────────────────────────────────────────────────────┘
-```
+**Policies:** TravelEasy, Scootsurance, TravelEasy Pre-Ex · **Model:** Groq `llama-3.3-70b-versatile` (JSON mode).
 
 ---
 
-## 📂 Repository Structure — Where to Find What
+### 💬 Block 2: Conversational magic
 
-```
-ancileo-msig/
-├── README.md                          ← You are here
-│
-├── Taxonomy/                          ← FOR BLOCK 1 (Normalization)
-│   ├── Taxonomy_Hackathon.json       ← Schema to normalize policies into
-│   └── Travel Insurance Product Taxonomy - Documentation.pdf
-│
-├── Policy_Wordings/                   ← FOR BLOCK 1 (Source Documents)
-│   ├── Scootsurance QSR022206_updated.pdf
-│   ├── TravelEasy Policy QTD032212.pdf
-│   └── TravelEasy Pre-Ex Policy QTD032212-PX.pdf
-│
-├── Hackathon_Documentation/           ← API & Additional Resources
-│   ├── Travel Insurance API Documentation.pdf  ← API endpoints & integration guide
-│   └── Scoot_SG_destination_list.xlsx         ← Destination data for quotes
-│
-├── Claims_Data_DB.pdf                ← Historical claims database for BONUS BLOCK
-│
-├── Payments/                         ← FOR BLOCK 4 (Payments)
-│   ├── docker-compose.yaml           ← Local payment stack (DynamoDB + Stripe webhook)
-│   ├── webhook/                      ← Stripe webhook service
-│   │   ├── Dockerfile
-│   │   ├── requirements.txt
-│   │   └── stripe_webhook.py
-│   ├── payment_pages/                ← Success/cancel pages
-│   │   ├── app.py
-│   │   ├── Dockerfile
-│   │   └── requirements.txt
-│   ├── scripts/                      ← Database initialization
-│   │   ├── Dockerfile.init
-│   │   └── init_payments_table.py
-│   ├── test_payment_flow.py          ← Interactive payment test
-│   ├── requirements.txt              ← Python dependencies
-│   └── README.md                     ← Detailed payment stack docs
-│
-└── Next-Generation Conversational Travel Insurance Distribution Hackathon.pdf
-```
+- **Natural-language Q&A** with a consistent, travel-savvy tone.
+- **Sentiment detection** (confused, frustrated, anxious, excited) and **adaptive tone**.
+- **Multi-language**: auto-detect language and respond in kind.
+- **Conversation memory** for preferences and trip context.
+- **Personality**: friendly, clear, with light emoji use.
+
+**Implementation:** `conversation_handler.py` · Memory is in-memory (extendable to Redis).
 
 ---
 
-## 🏗️ Innovation Blocks — Inspiration & Guidance
+### 📄 Block 3: Document intelligence
 
-> **🚀 Remember**: These are **inspiration blocks**, not rigid requirements. Feel free to combine, modify, or completely reimagine any of these approaches!
+- **Multi-format**: PDFs, images, emails, plain text.
+- **Structured extraction**: dates, destinations, travelers, costs.
+- **Validation**: flags missing data and asks follow-ups.
+- **Quote generation** from trip data with **activity-based** and **age-based** pricing.
 
-### 🧠 Block 1: Policy Intelligence — Your Approach to Understanding Documents
-
-**💡 Innovation Opportunity**: How will you make sense of complex insurance documents? 
-
-**Traditional Approach**: Convert PDFs into structured data using predefined taxonomies.
-
-**🚀 Your Innovation Space**:
-- **Beyond text extraction**: Could you use visual analysis to understand policy layouts?
-- **Dynamic normalization**: What if your system learns new terminology on the fly?
-- **Semantic understanding**: How might you capture the "spirit" of policies, not just the words?
-
-**Where to start**: `Taxonomy/Taxonomy_Hackathon.json`
-
-**The Challenge**:
-- Insurance policies use different words for the same thing ("medical expenses" vs "healthcare costs")
-- Limits are buried in paragraphs ("up to $50,000 per trip, with a sub-limit of $5,000 for dental")
-- You need to compare apples-to-apples across 3+ products
-
-**💡 One Possible Solution — Taxonomy Normalization** (but innovate beyond this!):
-
-The `Taxonomy_Hackathon.json` file shows you the **target structure**:
-
-```json
-{
-  "taxonomy_name": "Travel Insurance Product Taxonomy",
-  "products": ["Product A", "Product B", "Product C"],
-  "layers": {
-    "layer_1_general_conditions": [
-      {
-        "condition": "age_eligibility",
-        "condition_type": "eligibility",
-        "products": {
-          "Product A": {
-            "condition_exist": true,
-            "original_text": "Travelers must be between 18-75 years old...",
-            "parameters": {
-              "min_age": 18,
-              "max_age": 75
-            }
-          },
-          "Product B": { ... }
-        }
-      }
-    ],
-    "layer_2_benefits": [...],
-    "layer_3_benefit_conditions": [...],
-    "layer_4_operational": [...]
-  }
-}
-```
-
-**Four Layers to Extract**:
-
-1. **Layer 1: General Conditions**
-   - Eligibility: age, residency, trip duration, health declarations
-   - General exclusions: pre-existing conditions, high-risk activities, war/terrorism
-
-2. **Layer 2: Benefits**
-   - Medical coverage, trip cancellation, baggage protection
-   - Maximum limits, sub-limits, geographic variations
-
-3. **Layer 3: Benefit-Specific Conditions**
-   - When does specific coverage apply?
-   - What's excluded under each benefit?
-   - Waiting periods, documentation requirements
-
-4. **Layer 4: Operational Details**
-   - Deductibles and co-pays
-   - Approved provider networks
-   - Claims procedures and time limits
-
-
-### 💬 Block 2: Conversational Magic — How Will You Make Insurance Chat Feel Natural?
-
-**💡 Innovation Opportunity**: Transform insurance from boring forms into engaging conversations.
-
-**Traditional Approach**: Answer questions with policy citations and comparisons.
-
-**🚀 Your Innovation Space**:
-- **Personality & Empathy**: What if your bot had a unique personality that users love?
-- **Proactive Intelligence**: Could it anticipate questions before users ask them?
-- **Emotional Intelligence**: How might it adapt to user stress, confusion, or excitement?
-- **Multimodal Conversations**: What if users could share photos, voice messages, or documents naturally?
-- **Learning & Memory**: Could it remember user preferences across sessions?
-
-**The Challenge**: Users ask questions in plain English. Your system must know whether to use:
-- **Normalized data** for "Which plan has better medical coverage?"
-- **Original policy text** for "What exactly is covered under medical expenses?"
-- **Both** for "What happens if I break my leg skiing in Japan?"
-
-**Query Types**:
-
-| Query Type | Example | Data Source | Output |
-|------------|---------|-------------|--------|
-| **Comparison** | "Compare medical coverage between Plan A and B" | Normalized taxonomy | Side-by-side matrix with clear differences |
-| **Explanation** | "What's covered under trip cancellation?" | Original text + context | Detailed answer with exact policy citations |
-| **Eligibility** | "Am I covered for pre-existing conditions?" | Rules + text | Clear yes/no with qualifying conditions |
-| **Scenario** | "Skiing accident in Japan—am I covered?" | Multiple benefits/exclusions | Step-by-step coverage analysis |
-
-**Deliverables**:
-- [ ] Working MCP tools for comparison and FAQ
-- [ ] All answers include citations to original policy text
-- [ ] Session memory maintains conversation state
-- [ ] Demo: answer 3+ different query types accurately
+**Stack:** pdfplumber (primary), PyPDF2 fallback, Groq for structured JSON extraction.
 
 ---
 
-### 📄 Block 3: Document Intelligence — What Innovative Ways Can You Extract Trip Data?
+### 💳 Block 4: Seamless commerce
 
-**💡 Innovation Opportunity**: Replace tedious form-filling with intelligent document understanding.
+- **Stripe** checkout sessions created from the chat.
+- **DynamoDB** for payment records and status.
+- **Status polling** so the bot can report payment state in real time.
+- **Webhooks**: Stripe events update DynamoDB via the Payments stack.
+- **Error handling** for failures and edge cases.
 
-**Traditional Approach**: Upload documents → extract data → generate quotes.
+**Setup:** Uses the repo `Payments/` Docker stack (DynamoDB Local, webhook service, payment pages).
 
-**🚀 Your Innovation Space**:
-- **Smart Document Understanding**: What if your system could read handwritten notes or messy itineraries?
-- **Predictive Extraction**: Could it infer missing information from context?
-- **Multi-format Intelligence**: How might it handle photos, screenshots, or voice recordings?
-- **Real-time Validation**: What if it could spot inconsistencies and ask clarifying questions?
-- **Contextual Recommendations**: Could it suggest additional coverage based on trip patterns?
+---
 
-**The Transformation**:
-- ❌ **Old way**: Fill 15-30 form fields manually (20 minutes, 70% abandonment)
-- ✅ **New way**: Upload flight booking PDF (2 minutes, instant quote)
+### 🎯 Block 5: Predictive intelligence
 
-**Document Types to Handle**:
-- ✈️ Flight confirmations (dates, destinations, traveler names, ticket costs)
-- 🏨 Hotel bookings (check-in/out dates, location, investment value)
-- 📄 Itineraries (activities, destinations, timeline)
-- 🛂 Visa applications (trip purpose, duration)
+- **Risk assessment** from destination, activities, age, duration, and season.
+- **Historical-style analysis** (synthetic claims data; extendable to real DB).
+- **Coverage recommendations** (e.g. medical limits) based on trip and risk.
+- **Activity risk scoring** and **seasonal patterns** in the model.
 
+**Implementation:** `predictive_intelligence.py` · Multi-factor risk scoring + Groq for natural-language recommendations.
 
-### 💳 Block 4: Seamless Commerce — How Do You Make Purchasing Feel Effortless?
+---
 
-**💡 Innovation Opportunity**: Transform payment from a friction point into a delightful experience.
+## 🎨 Frontend
 
-**Traditional Approach**: Redirect to external payment pages, lose conversation context.
+- **Chat UI**: gradients, smooth animations, real-time messaging.
+- **Markdown** in bot responses and **quick-action** sample questions.
+- **Mobile-friendly** layout.
 
-**🚀 Your Innovation Space**:
-- **In-Chat Payments**: What if users never leave the conversation?
-- **Trust & Security**: How might you build confidence through transparency?
-- **Post-Purchase Experience**: How do you make policy delivery feel special?
+**Stack:** Next.js 14 (App Router), TypeScript, Tailwind CSS.
 
-**The Challenge**: MCP servers don't handle callbacks natively, but we've provided a **creative workaround** (though you're free to innovate beyond this!).
+---
 
-**🛠️ Our Suggested Approach — Callback Server Workaround** (Optional!):
+## 📡 API overview
 
-> **Why This Workaround?**: MCP servers are designed for stateless tool calls, not persistent webhooks. Our callback server bridges this gap by:
-> 1. **Receiving Stripe webhooks** when payments complete
-> 2. **Updating a shared database** with payment status
-> 3. **Allowing your MCP tools** to poll for status updates
-> 
-> **💡 But Remember**: This is just ONE approach! Feel free to innovate with:
-> - **Direct API integrations** with payment providers
-> - **Event-driven architectures** using message queues
-> - **Real-time updates** via WebSockets or Server-Sent Events
-> - **Blockchain-based payments** for transparency
-> - **Any other creative solution** you can imagine!
+Base URL: `http://localhost:8001/api/`
 
-**Where to start**: `Payments/` folder (but don't feel constrained by our approach!)
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/ask` | POST | Ask questions about insurance |
+| `/extract` | POST | Extract trip info from documents |
+| `/quote` | POST | Generate personalized quotes |
+| `/compare` | POST | Compare policies |
+| `/risk` | POST | Get risk assessment |
+| `/payment/create` | POST | Create payment session |
+| `/payment/status/{id}` | GET | Check payment status |
 
-**What's in the Payments folder**:
+---
 
-The `Payments/` folder contains a working payment system with:
+## 🔧 Configuration
 
-```
-Payments/
-├── docker-compose.yaml          ← Start all services with one command
-├── webhook/
-│   └── stripe_webhook.py        ← Receives Stripe payment events, updates database
-├── payment_pages/
-│   └── app.py                   ← Success/cancel pages users see after payment
-├── test_payment_flow.py         ← Test the entire flow end-to-end
-└── README.md                    ← Detailed docs for the payment stack
-```
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `GROQ_API_KEY` | Yes | All AI features |
+| `STRIPE_SECRET_KEY` | No | Payment processing |
+| `STRIPE_WEBHOOK_SECRET` | No | Webhook validation |
+| `DDB_ENDPOINT` | No | Default: `http://localhost:8000` |
+| `AWS_REGION` | No | Default: `ap-southeast-1` |
 
-**The Stack** (runs locally via Docker):
+---
 
-| Service | Port | What It Does |
-|---------|------|--------------|
-| **DynamoDB Local** | 8000 | Stores payment records |
-| **DynamoDB Admin UI** | 8010 | View database contents in browser |
-| **Stripe Webhook** | 8086 | Listens for Stripe events, updates payment status |
-| **Payment Pages** | 8085 | Shows success/cancel pages after checkout |
-
-**Quick Start**:
+## 🧪 Quick test
 
 ```bash
-cd Payments/
-
-# 1. Set your Stripe webhook secret
-echo "STRIPE_WEBHOOK_SECRET=whsec_your_secret_here" > .env
-
-# 2. Start all services
-docker-compose up -d
-
-# 3. Verify everything is running
-curl http://localhost:8086/health
-curl http://localhost:8085/health
-open http://localhost:8010  # View database UI
+python test_system.py
 ```
 
-**Payment Flow Visualization**:
-
-<img width="6206" height="2577" alt="Stripe_Callback_Workaround 41 jpg" src="https://github.com/user-attachments/assets/674f330e-aff2-4fff-9a40-882ded5dd613" />
-
-
-**💡 Why This Architecture?**: MCP servers are stateless and can't receive webhooks directly. Our callback server bridges this gap, but feel free to innovate with your own approach!
-
-**Test the Payment Flow**:
-
-```bash
-# Interactive test that walks you through the entire flow
-pip install -r Payments/requirements.txt
-python Payments/test_payment_flow.py
-
-# It will:
-# 1. Create a test payment record
-# 2. Generate a real Stripe payment link
-# 3. Wait for you to pay (use test card: 4242 4242 4242 4242)
-# 4. Verify webhook processed the payment
-# 5. Confirm status changed to 'completed'
-```
-
-**Your MCP Purchase Tool Should**:
-- Create payment record in DynamoDB
-- Generate Stripe checkout session
-- Monitor webhook updates in real-time
-- Report status back to the chat
-- Handle errors gracefully (declined cards, expired sessions, etc.)
-
-**Deliverables**:
-- [ ] MCP purchase tool that creates Stripe sessions
-- [ ] Payment status updates reflected in conversation
-- [ ] Success/failure handling with clear user messaging
-- [ ] Policy delivery confirmation after successful payment
+Covers policy extraction, conversation handling, document extraction, risk assessment, and payment handler (when keys are set).
 
 ---
 
-### 🎯 Block 5: Predictive Intelligence — How Can You Use Claims Data to Create Breakthrough Insights?
+## 📁 Repo layout
 
-**💡 Innovation Opportunity**: Transform historical data into predictive intelligence that revolutionizes insurance recommendations.
-
-**🚀 FREE DATA FOR INNOVATION**: We're providing you with **real historical claims data** and This is your chance to:
-
-- **Discover hidden patterns** in travel risks and claims
-- **Build predictive models** that anticipate user needs
-- **Create breakthrough insights** that traditional insurers miss
-- **Develop novel recommendation engines** based on real-world data
-- **Experiment with AI approaches** that could transform the industry
-
-**💡 Innovation Questions to Explore**:
-- What if you could **predict claim likelihood** before users even ask?
-- How might you use **seasonal patterns** to suggest optimal coverage timing?
-- Could you build **risk scoring** that's more accurate than traditional methods?
-- What if you could **prevent claims** through proactive recommendations?
-- How might you use **demographic insights** to personalize experiences?
-
-**Example Innovation Scenario**:
 ```
-User uploads: Flight to Japan (skiing trip)
-Your AI analyzes: Historical claims for Japan ski trips
-Discovers: 80% of medical claims exceed $30,000
-Innovates: "Based on similar trips, we recommend the Silver plan 
-           with $50,000 medical coverage (vs. Bronze at $20,000)
-           Plus, here's why ski insurance add-ons matter..."
+WanderSure/
+├── wandersure_server.py      # MCP server (main entry)
+├── run_server.py             # FastAPI server
+├── policy_intelligence.py    # Block 1
+├── conversation_handler.py  # Block 2
+├── document_intelligence.py  # Block 3
+├── payment_handler.py        # Block 4
+├── predictive_intelligence.py # Block 5
+├── test_system.py            # Test suite
+├── frontend/                 # Next.js UI
+├── Payments/                 # Payment services (Docker)
+├── Taxonomy/                 # Policy taxonomy
+├── Policy_Wordings/          # Source policy PDFs
+└── problem_statement.md      # Original challenge brief
 ```
-
-> **📊 YOUR INNOVATION PLAYGROUND**: The `Claims_Data_DB.pdf` contains historical claims data. Use it to build the most innovative B2C insurance agent possible!
-> 
-> **What's Inside**:
-> - **Real claims patterns** by destination, activity, and demographics
-> - **Actual claim amounts** for different scenarios
-> - **Risk factors** and correlation data
-> - **Seasonal trends** and coverage gaps
-> - **Everything you need** to build breakthrough insights
 
 ---
 
-## 🏆 Judging Criteria — Innovation First!
+## ✅ Innovation checklist (what we hit)
 
-Your submission will be evaluated on:
+- Unique approach to understanding insurance documents
+- Normalization beyond fixed taxonomies
+- Comparison with citations
+- Distinct personality and natural conversation flow
+- Novel extraction and validation
+- Seamless payment flow and error handling
+- Risk and recommendation from claims-style data
+- Predictive modeling and clear value for the user
 
-### 🚀 Innovation & Creativity (30%)
-- **Breakthrough thinking**: How did you reimagine the insurance experience?
-- **Novel approaches**: What creative solutions did you develop?
-- **Unexpected combinations**: How did you combine technologies or concepts in new ways?
-- **Future vision**: How does your solution point toward the next generation of insurance?
+**WanderSure is a full implementation of the five blocks with real UX and technical enhancements.**
 
-### 💡 Technical Excellence (25%)
-- **Smart implementation**: How well did you execute your innovative ideas?
-- **MCP mastery**: Creative use of MCP capabilities beyond basic tool calls
-- **Architecture innovation**: Novel system design and integration approaches
-- **Code quality**: Clean, maintainable, and well-documented solutions
-
-### 🎯 User Experience Innovation (20%)
-- **Conversation design**: How did you make insurance chat feel natural and engaging?
-- **Personalization**: What innovative ways did you customize the experience?
-- **Emotional intelligence**: How did you handle user emotions and build trust?
-- **Delight factors**: What surprising moments did you create?
-
-### 🌟 Business Impact & Vision (15%)
-- **Market transformation**: How could your approach change the insurance industry?
-- **Scalability innovation**: What novel approaches to growth and expansion?
-- **Revenue innovation**: Creative monetization or value creation ideas?
-- **Industry understanding**: Deep insights into insurance challenges and opportunities
-
-### ⚡ Feasibility & Execution (10%)
-- **Realistic innovation**: Groundbreaking ideas that could actually work
-- **Implementation path**: Clear roadmap from prototype to production
-- **Error handling**: Robust solutions for real-world challenges
-- **Edge case innovation**: Creative approaches to handling unusual situations
-
-## ✅ Innovation Checklist — Your Creative Journey
-
-> **🚀 Remember**: These are **inspiration checkpoints**, not rigid requirements. Feel free to innovate beyond any of these suggestions!
-
-### 🧠 Policy Intelligence Innovation
-- [ ] **Your unique approach** to understanding insurance documents
-- [ ] **Creative normalization** that goes beyond traditional taxonomies
-- [ ] **Innovative comparison methods** that reveal hidden insights
-- [ ] **Documentation of your breakthroughs** and novel approaches
-
-### 💬 Conversational Magic Innovation
-- [ ] **Unique personality** that users love and remember
-- [ ] **Innovative conversation flows** that feel natural and engaging
-- [ ] **Creative citation methods** that build trust and understanding
-- [ ] **Breakthrough interaction patterns** that surprise and delight
-
-### 📄 Document Intelligence Innovation
-- [ ] **Novel extraction approaches** that handle edge cases creatively
-- [ ] **Innovative validation methods** that catch errors before they matter
-- [ ] **Creative integration** with conversation flow
-- [ ] **Breakthrough accuracy** through innovative techniques
-
-### 💳 Commerce Innovation
-- [ ] **Seamless payment experience** that feels magical
-- [ ] **Creative trust-building** approaches
-- [ ] **Innovative error handling** that turns problems into opportunities
-- [ ] **Breakthrough post-purchase** experience design
-
-### 🎯 Predictive Intelligence Innovation
-- [ ] **Novel insights** from claims data that others missed
-- [ ] **Creative recommendation engines** that feel personal and smart
-- [ ] **Breakthrough predictive models** that anticipate user needs
-- [ ] **Innovative data visualization** that makes complex insights clear
-
----
-
-## 🤝 Support & Innovation Community
-
-**Your Innovation Mentor**:
-- Joffrey Lemery — Head of AI, Ancileo
-- **Focus**: Helping you push boundaries and explore breakthrough ideas
-
-**Getting Help & Inspiration**:
-- **Innovation questions**: Ask during mentor sessions — we love creative thinking!
-- **Technical exploration**: Reference `https://modelcontextprotocol.io/` for MCP capabilities
-- **Payment innovation**: See `Payments/README.md` for our suggested approach (but innovate beyond it!)
-- **Data exploration**: Dive deep into `Claims_Data_DB.pdf` — it's your innovation playground!
+For the original challenge text and judging criteria, see **`problem_statement.md`**.
